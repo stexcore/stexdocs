@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ignore": [".data/", ".data/*.sqlite*", ".data/*.db"],
+  "ext": "ts,tsx,json",
+  "exec": "tsx src/demo/server.ts"
+}

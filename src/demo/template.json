@@ -1,0 +1,240 @@
+{
+  "metadata": {
+    "title": "Mi API de Productos",
+    "description": "Documentación de la API para gestionar productos en el catálogo",
+    "version": "1.0.0",
+    "author": "StexCore",
+    "icon": "https://cdn.example.com/icons/product.svg"
+  },
+  "paths": {
+    "/api/products": {
+      "get": {
+        "summary": "Listar productos",
+        "tags": ["Productos"],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 1, "maximum": 100 },
+            "required": false,
+            "description": "Cantidad máxima de productos a devolver"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 0 },
+            "required": false,
+            "description": "Índice de inicio para paginación"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de productos obtenida exitosamente",
+            "content": {
+              "application/json": [
+                {
+                  "id": "string",
+                  "name": "string",
+                  "price": 0,
+                  "inStock": true
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "error": "Internal error"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un nuevo producto",
+        "tags": ["Productos"],
+        "body": {
+          "type": "application/json",
+          "required": true,
+          "content": {
+            "name": "string",
+            "description": "string",
+            "price": 0,
+            "inStock": true
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Producto creado correctamente",
+            "content": {
+              "application/json": {
+                "id": "string",
+                "name": "string",
+                "price": 0,
+                "inStock": true
+              }
+            }
+          },
+          "400": {
+            "description": "Datos inválidos en la petición",
+            "content": {
+              "application/json": {
+                "error": "Bad request"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/{productId}": {
+      "get": {
+        "summary": "Obtener un producto por su ID",
+        "tags": ["Productos"],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "schema": { "type": "string", "format": "uuid" },
+            "required": true,
+            "description": "Identificador único del producto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto encontrado",
+            "content": {
+              "application/json": {
+                "id": "string",
+                "name": "string",
+                "price": 0,
+                "inStock": true
+              }
+            }
+          },
+          "404": {
+            "description": "Producto no encontrado",
+            "content": {
+              "application/json": {
+                "error": "Not found"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Reemplazar completamente un producto",
+        "tags": ["Productos"],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "schema": { "type": "string", "format": "uuid" },
+            "required": true,
+            "description": "ID del producto a reemplazar"
+          }
+        ],
+        "body": {
+          "type": "application/json",
+          "required": true,
+          "content": {
+            "name": "string",
+            "description": "string",
+            "price": 0,
+            "inStock": true
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Producto reemplazado exitosamente",
+            "content": {
+              "application/json": {
+                "id": "string",
+                "name": "string",
+                "price": 0,
+                "inStock": true
+              }
+            }
+          },
+          "400": {
+            "description": "Petición inválida",
+            "content": {
+              "application/json": {
+                "error": "Bad request"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Actualizar parcialmente un producto",
+        "tags": ["Productos"],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "schema": { "type": "string", "format": "uuid" },
+            "required": true,
+            "description": "ID del producto a actualizar"
+          }
+        ],
+        "body": {
+          "type": "application/json",
+          "required": true,
+          "content": {
+            "price": 0,
+            "inStock": true
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Producto actualizado exitosamente",
+            "content": {
+              "application/json": {
+                "id": "string",
+                "name": "string",
+                "price": 0,
+                "inStock": true
+              }
+            }
+          },
+          "400": {
+            "description": "Datos de actualización inválidos",
+            "content": {
+              "application/json": {
+                "error": "Bad request"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un producto",
+        "tags": ["Productos"],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "schema": { "type": "string", "format": "uuid" },
+            "required": true,
+            "description": "ID del producto a eliminar"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Producto eliminado, sin contenido",
+            "content": {}
+          },
+          "404": {
+            "description": "Producto no encontrado",
+            "content": {
+              "application/json": {
+                "error": "Not found"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@stexcore/stexdoc",
+  "version": "1.0.0-pre-alpha.1",
+  "main": "dist/lib/index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "build": "tsc && cp src/demo/template.json dist/demo/template.json"
+  },
+  "author": "stexcore",
+  "license": "MIT",
+  "description": "Middleware SSR para Express que genera documentación interactiva de APIs desde un spec JSON",
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
+    "express": "^5.1.0",
+    "joi": "^18.0.1",
+    "mime-types": "^3.0.1",
+    "nodemon": "^3.1.10",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^19.1.7",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2"
+  }
+}
