@@ -71,7 +71,7 @@ export interface ITemplateResponse {
 /**
  * Represents a single documentation page for a given route and method.
  */
-export interface ITemplateSection {
+export interface ITemplateRoute {
   /** Short summary or title of the endpoint */
   summary: string;
 
@@ -120,9 +120,11 @@ export interface ITemplateMetadata {
 export interface ITemplate {
   metadata: ITemplateMetadata;
 
-  paths: {
-    [route: string]: {
-      [method in ITemplateMethod]: ITemplateSection;
-    };
+  sections: {
+    [section: string]: {
+      [route: string]: {
+        [method in ITemplateMethod]: ITemplateRoute;
+      };
+    }
   };
 }

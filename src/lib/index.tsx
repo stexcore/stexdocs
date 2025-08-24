@@ -6,6 +6,8 @@ import ErrorPage from "./error";
 import App from "./App";
 import { serveStatic } from "src/utils/static.util";
 import staticAssetsConstant from "src/constants/static-assets.constant";
+import { ITemplate, ITemplateTheme } from "src/types/template.type";
+import cookiesUtil from "src/utils/cookies.util";
 
 /**
  * StexDocs middleware factory.
@@ -52,8 +54,19 @@ export default function stexdocs(config: IStexDocsConfig): RequestHandler {
         const url = new URL(fullUrl);
         const baseUrl = `${url.origin}${url.pathname}`;
 
+        const cookies = cookiesUtil.parseCookies(req.headers.cookie);
+        const theme = cookies["stexdoc-theme"] as ITemplateTheme | undefined;
+
+        const templateData: ITemplate = {
+          ...config.template,
+          metadata: {
+            ...config.template.metadata,
+            theme: theme || config.template.metadata.theme
+          }
+        }
+
         // Create React app instance with injected template and base URL
-        const app = <App template={config.template} baseUrl={baseUrl} />;
+        const app = <App template={templateData} baseUrl={baseUrl} />;
 
         // Stream the React app to the client using React 18's pipeable stream
         const { pipe } = renderToPipeableStream(app, {

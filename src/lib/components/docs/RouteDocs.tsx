@@ -1,4 +1,4 @@
-import { ITemplateMethod, ITemplateSection } from "../../../types/template.type";
+import { ITemplateMethod, ITemplateRoute } from "../../../types/template.type";
 import SectionHeader from "./partials/SectionHeader";
 import SectionSummary from "./partials/SectionSummary";
 import SectionTags from "./partials/SectionTags";
@@ -7,21 +7,21 @@ import SectionRequestBody from "./partials/SectionRequestBody";
 import SectionResponses from "./partials/SectionResponses";
 
 /**
- * SectionDocs — renders a single API endpoint's documentation.
+ * RouteDocs — renders a single API endpoint's documentation.
  * It composes multiple partials to display metadata, parameters, request body, and responses.
  *
  * @param route The API route (e.g. "/users/{id}")
  * @param method The HTTP method (e.g. "GET", "POST")
  * @param section The parsed section object containing summary, tags, parameters, etc.
  */
-export default function SectionDocs({
+export default function RouteDocs({
   route,
   method,
   section,
 }: {
   route: string;
   method: ITemplateMethod;
-  section: ITemplateSection;
+  section: ITemplateRoute;
 }) {
   return (
     <div className="page-doc">

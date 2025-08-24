@@ -1,3 +1,4 @@
+import resourceUtil from "src/utils/resource.util";
 import { ITemplate } from "../types/template.type";
 import Docs from "./components/docs/Docs";
 
@@ -29,7 +30,7 @@ export default function App({
         {/* Favicon and global stylesheet */}
         <link
           rel="icon"
-          href={"?file=" + encodeURIComponent(template.metadata.icon || "favicon.png")}
+          href={resourceUtil.favicon(template.metadata.icon)}
         />
         <link rel="stylesheet" href="?file=styles.css" />
 

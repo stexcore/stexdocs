@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { ITemplate } from "src/types/template.type";
 
 /**
  * ─────────────────────────────────────────────────────────────
@@ -91,11 +92,19 @@ const pathsSchema = Joi.object().pattern(
 );
 
 /**
+ * Section block - group of paths
+ */
+const sectionSchema = Joi.object().pattern(
+  Joi.string(), // section name
+  pathsSchema
+);
+
+/**
  * Final template schema — root object
  */
-const templateSchema = Joi.object({
+const templateSchema = Joi.object<ITemplate>({
   metadata: metadataSchema.required(),
-  paths: pathsSchema.required(),
+  sections: sectionSchema.required(),
 }).required();
 
 export default templateSchema;

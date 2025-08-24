@@ -1,5 +1,6 @@
-import { ITemplate, ITemplateMethod, ITemplateSection } from "../../../types/template.type";
-import SectionDocs from "./SectionDocs";
+import { ITemplate, ITemplateMethod, ITemplateRoute } from "../../../types/template.type";
+import DocsHeader from "./DocsHeader";
+import DocsSectionGroup from "./DocsSectionGroup";
 
 /**
  * Docs component — renders all documented API sections.
@@ -14,24 +15,34 @@ export default function Docs({
   template: ITemplate;
 }) {
   // Extract all route-method pairs from the template
-  const paths = Object.entries(template.paths); // [route, { method: section }]
+  const sectionNames = Object.entries(template.sections); // [route, { method: section }]
 
   /**
    * Flatten the nested structure into a list of sections.
    * Each section includes its route, method, and corresponding content.
    */
   const sections: {
-    route: string;
-    method: ITemplateMethod;
-    section: ITemplateSection;
-  }[] = paths.flatMap(([route, path]) => {
-    const methods = Object.entries(path); // [method, section]
+    section: string,
+    paths: {
+      routeName: string;
+      method: ITemplateMethod;
+      route: ITemplateRoute;
+    }[]
+  }[] = sectionNames.flatMap(([section, paths]) => {
+    const pathEntries = Object.entries(paths);
 
-    return methods.map(([method, page]) => ({
-      route,
-      method: method as ITemplateMethod,
-      section: page,
-    }));
+    return {
+      section,
+      paths: pathEntries.flatMap(([routeName, path]) => {
+        const methods = Object.entries(path); // [method, section]
+
+        return methods.map(([method, route]) => ({
+          routeName,
+          method: method as ITemplateMethod,
+          route: route,
+        }));
+      })
+    }
   });
 
   /**
@@ -40,12 +51,12 @@ export default function Docs({
    */
   return (
     <>
+      <DocsHeader metadata={template.metadata} />
       {sections.map((section) => (
-        <SectionDocs
-          key={section.route + ":" + section.method}
-          section={section.section}
-          method={section.method}
-          route={section.route}
+        <DocsSectionGroup
+          key={section.section}
+          title={section.section}
+          endpoints={section.paths}
         />
       ))}
     </>

@@ -601,3 +601,66 @@ body {
 .copy-btn:active {
   opacity: 0.6;
 }
+
+.docs-header {
+  padding: 2rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--background-alt);
+  color: var(--text-color);
+}
+
+.docs-header__icon-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.docs-header__icon {
+  width: 48px;
+  height: 48px;
+}
+
+.docs-header__title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.docs-header__description {
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.docs-header__meta {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 1rem;
+}
+
+.docs-section-group {
+  margin-bottom: 2rem;
+}
+
+.docs-section-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+.theme-selector {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-selector select {
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+}
