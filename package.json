@@ -1,5 +1,5 @@
 {
-  "name": "@stexcore/stexdoc",
+  "name": "@stexcore/stexdocs",
   "version": "1.0.0-pre-alpha.1",
   "main": "dist/lib/index.js",
   "scripts": {

@@ -1,33 +1,50 @@
-import { ITemplate } from "../types/template";
+import { ITemplate } from "../types/template.type";
 import Docs from "./components/docs/Docs";
 
+/**
+ * App component — renders the full HTML document for SSR.
+ * Injects metadata, styles, and client-side hydration script.
+ *
+ * @param template Parsed template configuration (title, description, icon, etc.)
+ * @param baseUrl Base URL used for resolving relative paths
+ */
 export default function App({
-    template,
-    baseUrl
+  template,
+  baseUrl
 }: {
-    template: ITemplate,
-    baseUrl: string
+  template: ITemplate;
+  baseUrl: string;
 }) {
-    return (
-        <html>
-            <head>
-                <base href={baseUrl.replace(/\/$/, "") + "/"}/>
-                <meta charSet="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="description" content={template.metadata.description} />
-                <link rel="icon" href={"?file=" + encodeURIComponent(template.metadata.icon || "favicon.png")} />
-                <link rel="stylesheet" href="?file=styles.css"></link>
-                <title>{template.metadata.title}</title>
-                <script
-                  defer
-                  src="?file=scripts.js"
-                ></script>
-            </head>
-            <body style={{ whiteSpace: "pre" }}>
-                <div id="root">
-                    <Docs template={template}></Docs>
-                </div>
-            </body>
-        </html>
-    );
+  return (
+    <html lang="es" data-theme={template.metadata.theme}>
+      <head>
+        {/* Ensure relative paths resolve correctly */}
+        <base href={baseUrl.replace(/\/$/, "") + "/"} />
+
+        {/* Meta tags for encoding, responsiveness, and SEO */}
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={template.metadata.description} />
+
+        {/* Favicon and global stylesheet */}
+        <link
+          rel="icon"
+          href={"?file=" + encodeURIComponent(template.metadata.icon || "favicon.png")}
+        />
+        <link rel="stylesheet" href="?file=styles.css" />
+
+        {/* Page title from template */}
+        <title>{template.metadata.title}</title>
+
+        {/* Client-side hydration script */}
+        <script defer src="?file=scripts.js"></script>
+      </head>
+      <body>
+        {/* Root container for React hydration */}
+        <div id="root">
+          <Docs template={template} />
+        </div>
+      </body>
+    </html>
+  );
 }
