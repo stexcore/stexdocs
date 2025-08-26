@@ -10,7 +10,7 @@ export default function RouteTags({
   tags: string[];
 }) {
   return (
-    <section className="route-doc__tags">
+    <section className="stx-route-doc__tags">
       {/* Section title */}
       <h2>Tags</h2>
 

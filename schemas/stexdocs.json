@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StexDoc Template",
+  "type": "object",
+  "required": ["metadata", "sections"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["title", "description", "version", "theme"],
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "version": { "type": ["string", "number"] },
+        "author": { "type": "string" },
+        "icon": { "type": "string" },
+        "theme": {
+          "type": "string",
+          "enum": [
+            "default",
+            "hacker-green",
+            "tokyo-night",
+            "vscode-dark",
+            "night-owl",
+            "solarized-light",
+            "cyberpunk-neon",
+            "paper-white",
+            "terminal-classic",
+            "dracula",
+            "nord"
+          ]
+        }
+      }
+    },
+    "sections": {
+      "type": "object",
+      "patternProperties": {
+        "^.*$": {
+          "type": "object",
+          "patternProperties": {
+            "^.*$": {
+              "type": "object",
+              "properties": {
+                "get": { "$ref": "#/definitions/templatePage" },
+                "post": { "$ref": "#/definitions/templatePage" },
+                "info": { "$ref": "#/definitions/templatePage" },
+                "put": { "$ref": "#/definitions/templatePage" },
+                "delete": { "$ref": "#/definitions/templatePage" },
+                "patch": { "$ref": "#/definitions/templatePage" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "templatePage": {
+      "type": "object",
+      "required": ["summary"],
+      "properties": {
+        "summary": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "in", "schema"],
+            "properties": {
+              "name": { "type": "string" },
+              "in": {
+                "type": "string",
+                "enum": ["headers", "cookie", "query", "path"]
+              },
+              "required": { "type": "boolean" },
+              "description": { "type": "string" },
+              "schema": { "type": "object" }
+            }
+          }
+        },
+        "body": {
+          "type": "object",
+          "required": ["type", "content"],
+          "properties": {
+            "type": { "type": "string" },
+            "required": { "type": "boolean" },
+            "content": { "type": "object" }
+          }
+        },
+        "responses": {
+          "type": "object",
+          "patternProperties": {
+            "^\\d{3}$": {
+              "type": "object",
+              "required": ["description", "content"],
+              "properties": {
+                "description": { "type": "string" },
+                "content": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

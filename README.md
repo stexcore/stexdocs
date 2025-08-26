@@ -178,6 +178,25 @@ Below is a complete `template.json` example. Copy it, customize the values, and 
 
 ---
 
+🧠 VSCode Autocompletion for `.stx.json` Templates
+
+To enable automatic validation, autocompletion, and inline documentation for your StexDocs templates, you can register the JSON schema in your VSCode settings:
+
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["*.stx.json"],
+      "url": "./node_modules/stexdocs/schemas/template.schema.json"
+    }
+  ]
+}
+
+This allows VSCode to validate your documentation files without needing to manually add `$schema` to each one.
+
+💡 Tip: You can also copy the preconfigured `.vscode/settings.json` from `node_modules/stexdocs/examples` to get started instantly.
+
+---
+
 ## Contributing
 
 1. Fork the repository  
