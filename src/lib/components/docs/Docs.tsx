@@ -23,23 +23,23 @@ export default function Docs({
    */
   const sections: {
     section: string,
-    paths: {
+    endpoints: {
       routeName: string;
       method: ITemplateMethod;
-      route: ITemplateRoute;
+      endpoint: ITemplateRoute;
     }[]
   }[] = sectionNames.flatMap(([section, paths]) => {
     const pathEntries = Object.entries(paths);
 
     return {
       section,
-      paths: pathEntries.flatMap(([routeName, path]) => {
+      endpoints: pathEntries.flatMap(([routeName, path]) => {
         const methods = Object.entries(path); // [method, section]
 
         return methods.map(([method, route]) => ({
           routeName,
           method: method as ITemplateMethod,
-          route: route,
+          endpoint: route,
         }));
       })
     }
@@ -56,7 +56,7 @@ export default function Docs({
         <DocsSectionGroup
           key={section.section}
           title={section.section}
-          endpoints={section.paths}
+          endpoints={section.endpoints}
         />
       ))}
     </>

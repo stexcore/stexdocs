@@ -1,10 +1,10 @@
 import { ITemplateMethod, ITemplateRoute } from "../../../types/template.type";
-import SectionHeader from "./partials/SectionHeader";
-import SectionSummary from "./partials/SectionSummary";
-import SectionTags from "./partials/SectionTags";
-import SectionParameters from "./partials/SectionParameters";
-import SectionRequestBody from "./partials/SectionRequestBody";
-import SectionResponses from "./partials/SectionResponses";
+import RouteHeader from "./partials/RouteHeader";
+import RouteSummary from "./partials/RouteSummary";
+import RouteTags from "./partials/RouteTags";
+import RouteParameters from "./partials/RouteParameters";
+import RouteRequestBody from "./partials/RouteRequestBody";
+import RouteResponses from "./partials/RouteResponses";
 
 /**
  * RouteDocs — renders a single API endpoint's documentation.
@@ -12,36 +12,36 @@ import SectionResponses from "./partials/SectionResponses";
  *
  * @param route The API route (e.g. "/users/{id}")
  * @param method The HTTP method (e.g. "GET", "POST")
- * @param section The parsed section object containing summary, tags, parameters, etc.
+ * @param endpoint The parsed endpoint object containing summary, tags, parameters, etc.
  */
 export default function RouteDocs({
   route,
   method,
-  section,
+  endpoint,
 }: {
   route: string;
   method: ITemplateMethod;
-  section: ITemplateRoute;
+  endpoint: ITemplateRoute;
 }) {
   return (
-    <div className="page-doc">
+    <div className="stx-route-doc">
       {/* Header with route and method (e.g. GET /users/{id}) */}
-      <SectionHeader route={route} method={method} />
+      <RouteHeader route={route} method={method} />
 
       {/* Optional summary description of the endpoint */}
-      <SectionSummary summary={section.summary} />
+      <RouteSummary summary={endpoint.summary} />
 
       {/* Optional tags for categorization (e.g. ["auth", "user"]) */}
-      {section.tags?.length && <SectionTags tags={section.tags} />}
+      {endpoint.tags?.length && <RouteTags tags={endpoint.tags} />}
 
       {/* Optional query/path/header parameters */}
-      {section.parameters?.length && <SectionParameters parameters={section.parameters} />}
+      {endpoint.parameters?.length && <RouteParameters parameters={endpoint.parameters} />}
 
       {/* Optional request body schema and examples */}
-      {section.body && <SectionRequestBody body={section.body} />}
+      {endpoint.body && <RouteRequestBody body={endpoint.body} />}
 
       {/* Optional response definitions (status codes, schemas, examples) */}
-      {section.responses && <SectionResponses responses={section.responses} />}
+      {endpoint.responses && <RouteResponses responses={endpoint.responses} />}
     </div>
   );
 }

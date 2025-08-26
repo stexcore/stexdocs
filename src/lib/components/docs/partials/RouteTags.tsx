@@ -1,16 +1,16 @@
 /**
- * SectionTags — renders a list of tags associated with an API endpoint.
+ * RouteTags — renders a list of tags associated with an API endpoint.
  * Tags are typically used for grouping, filtering, or categorizing endpoints.
  *
  * @param tags Array of tag strings (e.g. ["auth", "user", "admin"])
  */
-export default function SectionTags({
+export default function RouteTags({
   tags,
 }: {
   tags: string[];
 }) {
   return (
-    <section className="page-doc__tags">
+    <section className="route-doc__tags">
       {/* Section title */}
       <h2>Tags</h2>
 

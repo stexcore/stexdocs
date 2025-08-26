@@ -1,4 +1,4 @@
-import resourceUtil from "src/utils/resource.util";
+import resourceUtil from "../utils/resource.util";
 import { ITemplate } from "../types/template.type";
 import Docs from "./components/docs/Docs";
 
@@ -32,13 +32,15 @@ export default function App({
           rel="icon"
           href={resourceUtil.favicon(template.metadata.icon)}
         />
-        <link rel="stylesheet" href="?file=styles.css" />
+        <link rel="stylesheet" href="?file=css/styles.css" />
+        <link rel="stylesheet" href="?file=css/themes.css" />
 
         {/* Page title from template */}
         <title>{template.metadata.title}</title>
 
         {/* Client-side hydration script */}
-        <script defer src="?file=scripts.js"></script>
+        <script defer src="?file=js/utils.js"></script>
+        <script defer src="?file=js/init.js"></script>
       </head>
       <body>
         {/* Root container for React hydration */}

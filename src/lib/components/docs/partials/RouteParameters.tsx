@@ -12,7 +12,7 @@ export default function SectionParameters({
   parameters: ITemplateParameter[];
 }) {
   return (
-    <section className="page-doc__parameters">
+    <section className="stx-route-doc__parameters">
       {/* Section title */}
       <h2>Parameters</h2>
 

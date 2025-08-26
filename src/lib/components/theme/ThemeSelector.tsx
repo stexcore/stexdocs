@@ -1,4 +1,5 @@
-import { ITemplateTheme } from "src/types/template.type";
+import { SelectInput } from "../ui/SelectInput";
+import { ITemplateTheme } from "../../../types/template.type";
 
 const themes = [
   "default",
@@ -14,21 +15,18 @@ const themes = [
   "nord",
 ];
 
+const themeOptions = themes.map((t) => ({
+  value: t,
+  label: t.replace(/-/g, " "),
+}));
+
 export default function ThemeSelector({ theme }: { theme: ITemplateTheme }) {
   return (
-    <div className="theme-selector">
-      <label htmlFor="theme-select">Tema visual:</label>
-      <select
-        className="theme-select"
-        defaultValue={theme || "default"}
-        data-theme-selector
-      >
-        {themes.map((t) => (
-          <option key={t} value={t}>
-            {t.replace(/-/g, " ")}
-          </option>
-        ))}
-      </select>
-    </div>
+    <SelectInput
+      label="Visual theme:"
+      options={themeOptions}
+      defaultValue={theme || "default"}
+      className="stx-theme-select"
+    />
   );
 }

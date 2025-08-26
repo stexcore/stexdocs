@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { ITemplate } from "src/types/template.type";
+import { ITemplate } from "../../types/template.type";
 
 /**
  * ─────────────────────────────────────────────────────────────

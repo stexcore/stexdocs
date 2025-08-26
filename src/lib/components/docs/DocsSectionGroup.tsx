@@ -9,18 +9,18 @@ export default function DocsSectionGroup({
   endpoints: {
     routeName: string;
     method: ITemplateMethod;
-    route: ITemplateRoute;
+    endpoint: ITemplateRoute;
   }[];
 }) {
   return (
-    <section className="docs-section-group">
-      <h2 className="docs-section-title">{title}</h2>
-      {endpoints.map(({ routeName, method, route }) => (
+    <section className="stx-docs-section-group">
+      <h2 className="stx-docs-section-title">{title}</h2>
+      {endpoints.map(({ routeName, method, endpoint }) => (
         <SectionDocs
           key={routeName + ":" + method}
           route={routeName}
           method={method}
-          section={route}
+          endpoint={endpoint}
         />
       ))}
     </section>

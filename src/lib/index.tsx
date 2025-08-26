@@ -1,13 +1,13 @@
-import type { IStexDocsConfig } from "src/types/stexdocs.type";
+import type { IStexDocsConfig } from "../types/stexdocs.type";
 import { RequestHandler } from "express";
 import { renderToPipeableStream } from "react-dom/server";
 import templateSchema from "./schemas/template.schema";
 import ErrorPage from "./error";
 import App from "./App";
-import { serveStatic } from "src/utils/static.util";
-import staticAssetsConstant from "src/constants/static-assets.constant";
-import { ITemplate, ITemplateTheme } from "src/types/template.type";
-import cookiesUtil from "src/utils/cookies.util";
+import { serveStatic } from "../utils/static.util";
+import staticAssetsConstant from "../constants/static-assets.constant";
+import { ITemplate, ITemplateTheme } from "../types/template.type";
+import cookiesUtil from "../utils/cookies.util";
 
 /**
  * StexDocs middleware factory.
